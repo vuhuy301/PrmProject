@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">OnlineShop</string>
+    <string name="fab_qrcode_description">Scan QR</string>
 </resources>
