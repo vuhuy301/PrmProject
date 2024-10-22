@@ -12,6 +12,8 @@ public class Product {
     private String images;
     private Boolean isActive;
 
+    public Product() {
+    }
     public Product(String productId, String name, String description, double price, int quantity, String category, String images, Boolean isActive) {
         this.productId = productId;
         this.name = name;
