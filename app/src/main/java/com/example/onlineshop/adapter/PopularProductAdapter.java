@@ -1,6 +1,7 @@
 package com.example.onlineshop.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.GranularRoundedCorners;
+import com.example.onlineshop.activity.DetailActivity;
 import com.example.onlineshop.databinding.ViewholderPupListBinding;
 import com.example.onlineshop.model.Product;
 
@@ -49,7 +51,9 @@ public class PopularProductAdapter extends RecyclerView.Adapter<PopularProductAd
                 .into(holder.binding.pic);
 
         holder.itemView.setOnClickListener(v -> {
-
+            Intent intent = new Intent(context, DetailActivity.class);
+            intent.putExtra("object", product);
+            context.startActivity(intent);
         });
     }
 
