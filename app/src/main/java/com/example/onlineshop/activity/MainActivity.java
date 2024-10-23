@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         recyclerView = binding.PopularView;
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         productList = new ArrayList<>();
         adapter = new PopularProductAdapter(productList);
         recyclerView.setAdapter(adapter);

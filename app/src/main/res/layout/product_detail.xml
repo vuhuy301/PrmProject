@@ -26,7 +26,7 @@
                     android:layout_marginTop="24dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    tools:src="@drawable/arrow"
+                    android:src="@drawable/arrow"
                     android:padding="8dp"
                     />
 
@@ -38,7 +38,7 @@
                     app:layout_constraintBottom_toBottomOf="@+id/backBtn"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/backBtn"
-                    tools:src="@drawable/bookmark" />
+                    android:src="@drawable/bookmark" />
 
                 <ImageView
                     android:id="@+id/imageView8"
@@ -48,7 +48,7 @@
                     app:layout_constraintBottom_toBottomOf="@+id/imageView7"
                     app:layout_constraintEnd_toStartOf="@+id/imageView7"
                     app:layout_constraintTop_toTopOf="@+id/imageView7"
-                    tools:src="@drawable/share" />
+                    android:src="@drawable/share" />
 
                 <View
                     android:id="@+id/view2"
@@ -81,7 +81,7 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/textView6"
+                    android:id="@+id/titleTxtDetail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -94,7 +94,7 @@
                     />
 
                 <TextView
-                    android:id="@+id/textView9"
+                    android:id="@+id/priceTxtDetail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="0"
@@ -174,7 +174,7 @@
                 android:background="@color/grey"/>
 
             <TextView
-                android:id="@+id/textView14"
+                android:id="@+id/descriptionTxtDetail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -184,7 +184,7 @@
                 android:textColor="@color/black"/>
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/button2"
+                android:id="@+id/buyBtnDetail"
                 android:layout_margin="16dp"
                 style="@android:style/Widget.Button"
                 android:layout_width="match_parent"
