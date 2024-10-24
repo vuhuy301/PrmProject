@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="#FFFFFF"
     android:backgroundTint="#FFFFFF"
-    tools:context=".MainActivity">
+    tools:context=".activity.MainActivity">
 
     <ScrollView
         android:id="@+id/scrollView2"
@@ -375,7 +375,7 @@
                         android:layout_height="24dp"
                         android:layout_gravity="center"
 
-                        tools:src="@drawable/btn_1" />
+                        android:src="@drawable/btn_1" />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -399,7 +399,7 @@
                         android:layout_height="24dp"
                         android:layout_gravity="center"
 
-                        tools:src="@drawable/btn_2" />
+                        android:src="@drawable/btn_2" />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -448,7 +448,7 @@
                         android:layout_height="24dp"
                         android:layout_gravity="center"
 
-                        tools:src="@drawable/btn_3" />
+                        android:src="@drawable/btn_3" />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -472,7 +472,7 @@
                         android:layout_height="24dp"
                         android:layout_gravity="center"
 
-                        tools:src="@drawable/btn_4" />
+                        android:src="@drawable/btn_4" />
 
                     <TextView
                         android:layout_width="match_parent"

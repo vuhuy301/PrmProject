@@ -1,9 +1,9 @@
 package com.example.onlineshop.model;
 
 import java.util.List;
+import java.io.Serializable;
+public class Product implements Serializable {
 
-public class Product {
-    private String productId;
     private String name;
     private String description;
     private double price;
@@ -12,8 +12,10 @@ public class Product {
     private String images;
     private Boolean isActive;
 
-    public Product(String productId, String name, String description, double price, int quantity, String category, String images, Boolean isActive) {
-        this.productId = productId;
+    public Product() {
+    }
+    public Product( String name, String description, double price, int quantity, String category, String images, Boolean isActive) {
+
         this.name = name;
         this.description = description;
         this.price = price;
@@ -23,13 +25,7 @@ public class Product {
         this.isActive = isActive;
     }
 
-    public String getProductId() {
-        return productId;
-    }
 
-    public void setProductId(String productId) {
-        this.productId = productId;
-    }
 
     public String getName() {
         return name;
