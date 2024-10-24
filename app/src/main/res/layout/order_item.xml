@@ -2,10 +2,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginBottom="2dp"
+    android:background="#43673AB7"
     android:orientation="vertical"
-    android:padding="16dp"
-    android:background="#F5F5F5"
-    android:layout_marginBottom="2dp">
+    android:padding="16dp">
 
     <!-- Phần thời gian và tên quán -->
     <LinearLayout
@@ -19,10 +19,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="11/01/2019 - 03:37"
-            android:textSize="18sp"
-            android:textColor="#000000"/>
+            android:textColor="#000000"
+            android:textSize="18sp" />
 
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -34,9 +35,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
-            android:text="Gà rán KFC"
-            android:textSize="17sp"
-            android:textColor="#000000"/>
+            android:text="Đơn hàng 1"
+            android:textColor="#000000"
+            android:textSize="18sp" />
     </LinearLayout>
 
     <!-- Phần giá tiền và trạng thái thanh toán -->
@@ -44,25 +45,24 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:paddingBottom="8dp"
-        >
+        android:paddingBottom="8dp">
 
         <TextView
             android:id="@+id/order_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="237.000đ"
-            android:textSize="18sp"
-            android:textColor="#FF5722"/>
+            android:textColor="#FF5722"
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/order_status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
-            android:text="Đã thanh toán"
-            android:textSize="18sp"
-            android:textColor="#4CAF50"
-            android:paddingLeft="17dp"/>
+            android:paddingLeft="17dp"
+            android:text="Đang chuẩn bị"
+            android:textColor="#3F51B5"
+            android:textSize="18sp" />
     </LinearLayout>
 </LinearLayout>
