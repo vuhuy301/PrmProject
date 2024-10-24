@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<!-- res/layout/activity_category_management.xml -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <!-- Toolbar với nút back và tiêu đề -->
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="52dp"
@@ -17,9 +17,8 @@
             android:layout_height="match_parent"
             android:background="#6200ED">
 
-
             <ImageView
-                android:id="@+id/imageView4"
+                android:id="@+id/imageView8"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
@@ -30,26 +29,37 @@
                 app:srcCompat="@drawable/arrow" />
 
             <TextView
-                android:id="@+id/textView6"
+                android:id="@+id/textView9"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Quản lý đơn hàng"
+                android:text="Quản lý danh mục"
                 android:textColor="#FFFFFF"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/imageView4"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.484" />
+                app:layout_constraintVertical_bias="0.5" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
 
-    <!-- RecyclerView để hiển thị danh sách đơn hàng -->
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewOrders"
+    <Button
+        android:id="@+id/btnAddCategory"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="8dp"/>
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="20dp"
+        android:text="Add New Category" />
+
+    <!-- RecyclerView for Category List -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewCategories"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:padding="8dp" />
+
+    <!-- Button to Add New Category -->
+
 </LinearLayout>
