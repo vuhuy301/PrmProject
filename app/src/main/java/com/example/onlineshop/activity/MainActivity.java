@@ -52,14 +52,14 @@ public class MainActivity extends AppCompatActivity {
 
     private void setUpCategoryClickListeners() {
 
-        binding.categoryLayout1.setOnClickListener(v -> loadProductsByCategory("Laptop văn phòng"));
-        binding.categoryLayout2.setOnClickListener(v -> loadProductsByCategory("Laptop đồ họa"));
-        binding.categoryLayout3.setOnClickListener(v -> loadProductsByCategory("Laptop gaming"));
+        binding.categoryLayout1.setOnClickListener(v -> loadProductsByCategory("2"));
+        binding.categoryLayout2.setOnClickListener(v -> loadProductsByCategory("3"));
+        binding.categoryLayout3.setOnClickListener(v -> loadProductsByCategory("1"));
 
     }
 
-    private void loadProductsByCategory(String category) {
-        databaseReference.orderByChild("category").equalTo(category).addListenerForSingleValueEvent(new ValueEventListener() {
+    private void loadProductsByCategory(String categoryId) {
+        databaseReference.orderByChild("categoryId").equalTo(categoryId).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 productList.clear();
