@@ -1,18 +1,16 @@
 package com.example.onlineshop.model;
 
 public class User {
-    private int userId;
+
     private String name;
     private String email;
     private String password;
     private String address;
     private String phoneNumber;
     private Boolean isActive;
-
     private String role;
 
-    public User(int userId, String name, String email, String password, String address, String phoneNumber, Boolean isActive, String role) {
-        this.userId = userId;
+    public User( String name, String email, String password, String address, String phoneNumber, Boolean isActive, String role) {
         this.name = name;
         this.email = email;
         this.password = password;
@@ -22,13 +20,6 @@ public class User {
         this.role = role;
     }
 
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
 
     public String getName() {
         return name;

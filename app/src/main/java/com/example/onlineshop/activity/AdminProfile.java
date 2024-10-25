@@ -19,4 +19,6 @@ public class AdminProfile extends AppCompatActivity {
         setContentView(R.layout.activity_admin_profile);
 
     }
+
+
 }
