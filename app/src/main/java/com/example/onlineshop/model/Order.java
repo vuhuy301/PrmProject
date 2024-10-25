@@ -11,10 +11,10 @@ public class Order {
     private List<OrderItem> items;
     private double totalAmount;
     private String status;
-    private Date orderDate;
+    private String orderDate;
     private String shippingAddress;
 
-    public Order(String orderId, int userId, String name, String phone, List<OrderItem> items, double totalAmount, String status, Date orderDate, String shippingAddress) {
+    public Order(String orderId, int userId, String name, String phone, List<OrderItem> items, double totalAmount, String status, String orderDate, String shippingAddress) {
         this.orderId = orderId;
         this.userId = userId;
         this.name = name;
@@ -24,6 +24,9 @@ public class Order {
         this.status = status;
         this.orderDate = orderDate;
         this.shippingAddress = shippingAddress;
+    }
+
+    public Order() {
     }
 
     public String getOrderId() {
@@ -82,11 +85,11 @@ public class Order {
         this.status = status;
     }
 
-    public Date getOrderDate() {
+    public String getOrderDate() {
         return orderDate;
     }
 
-    public void setOrderDate(Date orderDate) {
+    public void setOrderDate(String orderDate) {
         this.orderDate = orderDate;
     }
 
