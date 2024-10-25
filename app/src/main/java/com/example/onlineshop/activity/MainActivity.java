@@ -44,8 +44,39 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
         databaseReference = FirebaseDatabase.getInstance().getReference("products");
         fetchProducts();
-//        setContentView(R.layout.list_order);
 
+        setUpCategoryClickListeners();
+//        setContentView(R.layout.list_order);
+        binding.categoryLayoutAll.setOnClickListener(v -> fetchProducts());
+    }
+
+    private void setUpCategoryClickListeners() {
+
+        binding.categoryLayout1.setOnClickListener(v -> loadProductsByCategory("Laptop văn phòng"));
+        binding.categoryLayout2.setOnClickListener(v -> loadProductsByCategory("Laptop đồ họa"));
+        binding.categoryLayout3.setOnClickListener(v -> loadProductsByCategory("Laptop gaming"));
+
+    }
+
+    private void loadProductsByCategory(String category) {
+        databaseReference.orderByChild("category").equalTo(category).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                productList.clear();
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    Product product = snapshot.getValue(Product.class);
+                    if (product != null) {
+                        productList.add(product);
+                    }
+                }
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     private void fetchProducts() {
