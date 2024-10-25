@@ -7,6 +7,7 @@ import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -37,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         recyclerView = binding.PopularView;
-        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
         productList = new ArrayList<>();
         adapter = new PopularProductAdapter(productList);
         recyclerView.setAdapter(adapter);
