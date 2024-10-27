@@ -52,10 +52,10 @@ public class MainActivity extends AppCompatActivity {
 
     private void setUpCategoryClickListeners() {
 
-        binding.categoryLayout1.setOnClickListener(v -> loadProductsByCategory("2"));
-        binding.categoryLayout2.setOnClickListener(v -> loadProductsByCategory("3"));
-        binding.categoryLayout3.setOnClickListener(v -> loadProductsByCategory("1"));
-
+        binding.categoryLayout1.setOnClickListener(v -> loadProductsByCategory("1"));
+        binding.categoryLayout2.setOnClickListener(v -> loadProductsByCategory("2"));
+        binding.categoryLayout3.setOnClickListener(v -> loadProductsByCategory("3"));
+        binding.categoryLayout4.setOnClickListener(v -> loadProductsByCategory("4"));
     }
 
     private void loadProductsByCategory(String categoryId) {
