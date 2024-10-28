@@ -31,6 +31,15 @@ public class AdminActivity extends AppCompatActivity {
             }
         });
 
+        CardView cardViewCreateUser = findViewById(R.id.cardViewCreateUser);
+        cardViewCreateUser.setOnClickListener(new View.OnClickListener() { // Sửa từ cardViewUserList thành cardViewCreateUser
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AdminActivity.this, CreateUserActivity.class);
+                startActivity(intent);
+            }
+        });
+
 
     }
 }

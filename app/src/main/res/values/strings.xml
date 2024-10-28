@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">OnlineShop</string>
     <string name="fab_qrcode_description">Scan QR</string>
+    <string-array name="user_roles">
+        <item>Admin</item>
+        <item>Seller</item>
+        <item>Customer</item>
+    </string-array>
 </resources>
