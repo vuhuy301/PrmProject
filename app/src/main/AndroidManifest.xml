@@ -13,13 +13,22 @@
         android:theme="@style/Theme.OnlineShop"
         tools:targetApi="31">
         <activity
+            android:name=".activity.MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.UserDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.UserListActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.AdminProfile"
             android:exported="false" />
         <activity
             android:name=".activity.DetailActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.MainActivity"
+            android:name=".activity.AdminActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
