@@ -3,17 +3,25 @@ package com.example.onlineshop.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.onlineshop.R;
 import com.example.onlineshop.model.User;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class UserDetailActivity extends AppCompatActivity {
-
+    private Button buttonEdit;
+    private String userId; // Lưu userId để sử dụng
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,5 +56,14 @@ public class UserDetailActivity extends AppCompatActivity {
             phoneTextView.setText("Phone Number: " + user.getPhoneNumber());
             statusTextView.setText("Active Status: " + (user.getIsActive() ? "Active" : "Inactive"));
         }
+//        // Xử lý sự kiện click vào nút chỉnh sửa trạng thái
+//        buttonEdit.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(UserDetailActivity.this, EditUserActivity.class);
+//                intent.putExtra("user", user); // Truyền đối tượng User
+//                startActivity(intent);
+//            }
+//        });
     }
 }
