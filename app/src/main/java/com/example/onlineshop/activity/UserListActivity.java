@@ -1,12 +1,16 @@
 package com.example.onlineshop.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.onlineshop.R;
 import com.example.onlineshop.adapter.UserAdapter;
 import com.example.onlineshop.databinding.ActivityUserListBinding;
 import com.example.onlineshop.model.User;
@@ -39,6 +43,17 @@ public class UserListActivity extends AppCompatActivity {
 
         databaseReference = FirebaseDatabase.getInstance().getReference("users");
         fetchUsers();
+
+        ImageView backImageView = findViewById(R.id.imageView8);
+        backImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Quay lại admin_dashboard
+                Intent intent = new Intent(UserListActivity.this, AdminActivity.class);
+                startActivity(intent);
+                finish(); // Để không giữ lại activity hiện tại trên stack
+            }
+        });
     }
 
     private void fetchUsers() {
