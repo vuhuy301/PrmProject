@@ -26,4 +26,19 @@
         android:layout_height="wrap_content"
         android:text="User Role"
         android:textSize="16sp" />
+
+    <!-- Display Active Status -->
+    <TextView
+        android:id="@+id/userStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Active Status: "
+        android:textSize="16sp" />
+
+    <!-- Edit Status Button -->
+    <Button
+        android:id="@+id/editStatusButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Edit Status" />
 </LinearLayout>

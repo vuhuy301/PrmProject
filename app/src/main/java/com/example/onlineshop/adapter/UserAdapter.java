@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.onlineshop.activity.EditStatusActivity;
 import com.example.onlineshop.activity.UserDetailActivity;
 import com.example.onlineshop.databinding.ViewholderUserBinding;
 import com.example.onlineshop.model.User;
@@ -38,9 +39,21 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
         holder.binding.userEmail.setText(user.getEmail());
         holder.binding.userRole.setText(user.getRole());
 
+
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(context, UserDetailActivity.class);
             intent.putExtra("user", user); // Truyền đối tượng User
+            context.startActivity(intent);
+        });
+
+        String statusText = user.getIsActive() ? "Active" : "Inactive";
+        holder.binding.userStatus.setText("Active Status: " + statusText);
+
+        // Edit Status Button Click
+        holder.binding.editStatusButton.setOnClickListener(v -> {
+            Intent intent = new Intent(context, EditStatusActivity.class);
+            intent.putExtra("userId", user.getId());
+            intent.putExtra("isActive", user.getIsActive());
             context.startActivity(intent);
         });
     }

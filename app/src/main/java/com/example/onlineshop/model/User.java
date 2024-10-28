@@ -3,6 +3,7 @@ package com.example.onlineshop.model;
 import java.io.Serializable;
 
 public class User implements Serializable {
+    private String id;
     private String name;
     private String email;
     private String password;
@@ -16,7 +17,8 @@ public class User implements Serializable {
     }
 
     // Constructor với tham số
-    public User(String name, String email, String password, String address, String phoneNumber, Boolean isActive, String role) {
+    public User(String id, String name, String email, String password, String address, String phoneNumber, Boolean isActive, String role) {
+        this.id = id;
         this.name = name;
         this.email = email;
         this.password = password;
@@ -25,7 +27,14 @@ public class User implements Serializable {
         this.isActive = isActive;
         this.role = role;
     }
+    // Getter and Setter for id
+    public String getId() {
+        return id;
+    }
 
+    public void setId(String id) {
+        this.id = id;
+    }
     // Getter và Setter
     public String getName() {
         return name;
