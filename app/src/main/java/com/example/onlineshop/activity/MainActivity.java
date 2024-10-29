@@ -1,5 +1,6 @@
 package com.example.onlineshop.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Window;
 
@@ -15,6 +16,7 @@ import com.example.onlineshop.R;
 import com.example.onlineshop.adapter.PopularProductAdapter;
 import com.example.onlineshop.databinding.ActivityMainBinding;
 import com.example.onlineshop.model.Product;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -29,10 +31,16 @@ public class MainActivity extends AppCompatActivity {
     PopularProductAdapter adapter;
     ArrayList<Product> productList;
     DatabaseReference databaseReference;
+    private FirebaseAuth auth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        auth = FirebaseAuth.getInstance();
+        if(auth.getCurrentUser()==null){
+            startActivity(new Intent(MainActivity.this, SignInActivity.class));
+            finish();
+        }
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         EdgeToEdge.enable(this);
         setContentView(binding.getRoot());
