@@ -3,6 +3,7 @@ package com.example.onlineshop.adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -18,7 +19,15 @@ import java.util.Locale;
 
 public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> {
     private List<Order> orderList;
+    private OnItemClickListener listener;
 
+    public interface OnItemClickListener {
+        void onItemClick(Order order);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.listener = listener;
+    }
     public OrderAdapter(List<Order> orderList) {
         this.orderList = orderList;
     }
@@ -34,7 +43,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull OrderAdapter.ViewHolder holder, int position) {
         Order order = orderList.get(position);
-        holder.bind(order); // Sử dụng phương thức bind
+        holder.bind(order, listener);
     }
 
     @Override
@@ -56,11 +65,19 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
             status = itemView.findViewById(R.id.order_status);
         }
 
-        public void bind(Order order) {
+        public void bind(Order order, OnItemClickListener listener) {
             date.setText(order.getOrderDate());
             place.setText(order.getName());
             price.setText(String.valueOf(order.getTotalAmount()));
             status.setText(order.getStatus());
+
+            itemView.setOnClickListener(v -> {
+                if (listener != null) {
+                    listener.onItemClick(order);
+                }
+            });
         }
+
+
     }
 }

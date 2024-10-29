@@ -21,7 +21,7 @@
 
 
     <TextView
-        android:id="@+id/textView11"
+        android:id="@+id/productNameTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
@@ -33,7 +33,7 @@
         app:layout_constraintTop_toTopOf="@+id/backButton" />
 
     <TextView
-        android:id="@+id/textView12"
+        android:id="@+id/priceTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -41,7 +41,7 @@
         android:fontFamily="sans-serif-black"
         android:text="Edit Your Profile"
         app:layout_constraintStart_toStartOf="@+id/backButton"
-        app:layout_constraintTop_toBottomOf="@+id/textView11" />
+        app:layout_constraintTop_toBottomOf="@+id/productNameTextView" />
 
     <TextView
         android:id="@+id/editButton"
@@ -55,7 +55,7 @@
         android:gravity="center"
         android:text="Edit Your Profile"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView11" />
+        app:layout_constraintTop_toBottomOf="@+id/productNameTextView" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -69,7 +69,7 @@
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView12">
+        app:layout_constraintTop_toBottomOf="@+id/priceTextView">
 
 
         <TextView
@@ -83,7 +83,7 @@
             android:textColor="@color/black"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView11" />
+            app:layout_constraintTop_toBottomOf="@+id/productNameTextView" />
 
         <EditText
 
@@ -126,7 +126,7 @@
             android:textColor="@color/black"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView11" />
+            app:layout_constraintTop_toBottomOf="@+id/productNameTextView" />
 
         <EditText
 
@@ -167,7 +167,7 @@
             android:textColor="@color/black"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView11" />
+            app:layout_constraintTop_toBottomOf="@+id/productNameTextView" />
 
         <EditText
 
@@ -208,7 +208,7 @@
             android:textColor="@color/black"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView11" />
+            app:layout_constraintTop_toBottomOf="@+id/productNameTextView" />
 
         <EditText
 
@@ -248,7 +248,7 @@
             android:textColor="@color/black"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView11" />
+            app:layout_constraintTop_toBottomOf="@+id/productNameTextView" />
 
         <EditText
 
