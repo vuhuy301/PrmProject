@@ -1,5 +1,6 @@
 package com.example.onlineshop.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -19,6 +20,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,6 +41,19 @@ public class OrderManageActivity extends AppCompatActivity {
         orderList = new ArrayList<>();
         orderAdapter = new OrderAdapter(orderList);
         recyclerViewOrders.setAdapter(orderAdapter);
+
+        orderAdapter.setOnItemClickListener(order -> {
+            Intent intent = new Intent(OrderManageActivity.this, OrderDetailActivity.class);
+            intent.putExtra("orderId", order.getOrderId());
+            intent.putExtra("orderName", order.getName());
+            intent.putExtra("orderPhone", order.getPhone());
+            intent.putExtra("orderSp", order.getShippingAddress());
+            intent.putExtra("orderStatus", order.getStatus());
+            intent.putExtra("orderDate", order.getOrderDate());
+            intent.putExtra("totalAmount", order.getTotalAmount());
+            intent.putExtra("orderItems", (Serializable) order.getItems()); // truyền orderItems dưới dạng Serializable
+            startActivity(intent);
+        });
 
         databaseReference = FirebaseDatabase.getInstance().getReference("order");
 
