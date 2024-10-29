@@ -180,6 +180,7 @@
                 android:orientation="horizontal">
 
                 <LinearLayout
+                    android:id="@+id/categoryLayout1"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.2"
@@ -196,7 +197,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:text="Digitals"
+                        android:text="Office"
                         android:textAlignment="center"
                         android:textColor="@color/black"
 
@@ -204,6 +205,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/categoryLayout2"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.2"
@@ -220,7 +222,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:text="Cloths"
+                        android:text="Graphics"
                         android:textAlignment="center"
                         android:textColor="@color/black"
 
@@ -228,6 +230,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/categoryLayout3"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.2"
@@ -244,7 +247,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:text="Tools"
+                        android:text="Gaming"
                         android:textAlignment="center"
                         android:textColor="@color/black"
 
@@ -252,6 +255,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/categoryLayout4"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.2"
@@ -276,6 +280,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/categoryLayoutAll"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.2"
@@ -302,6 +307,7 @@
             </LinearLayout>
 
             <LinearLayout
+
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="24dp"
@@ -314,7 +320,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Popular Product"
+                    android:text="Product"
                     android:textColor="@color/black"
                     android:textSize="19sp"
                     android:textStyle="bold" />

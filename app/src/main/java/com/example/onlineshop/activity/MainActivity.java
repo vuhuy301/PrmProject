@@ -7,6 +7,7 @@ import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -37,14 +38,45 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         recyclerView = binding.PopularView;
-        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
         productList = new ArrayList<>();
         adapter = new PopularProductAdapter(productList);
         recyclerView.setAdapter(adapter);
         databaseReference = FirebaseDatabase.getInstance().getReference("products");
         fetchProducts();
-//        setContentView(R.layout.list_order);
 
+        setUpCategoryClickListeners();
+//        setContentView(R.layout.list_order);
+        binding.categoryLayoutAll.setOnClickListener(v -> fetchProducts());
+    }
+
+    private void setUpCategoryClickListeners() {
+
+        binding.categoryLayout1.setOnClickListener(v -> loadProductsByCategory("1"));
+        binding.categoryLayout2.setOnClickListener(v -> loadProductsByCategory("2"));
+        binding.categoryLayout3.setOnClickListener(v -> loadProductsByCategory("3"));
+        binding.categoryLayout4.setOnClickListener(v -> loadProductsByCategory("4"));
+    }
+
+    private void loadProductsByCategory(String categoryId) {
+        databaseReference.orderByChild("categoryId").equalTo(categoryId).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                productList.clear();
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    Product product = snapshot.getValue(Product.class);
+                    if (product != null) {
+                        productList.add(product);
+                    }
+                }
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     private void fetchProducts() {
