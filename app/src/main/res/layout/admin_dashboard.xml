@@ -420,7 +420,7 @@
         android:layout_marginStart="44dp"
         android:outlineAmbientShadowColor="@color/black"
         app:cardCornerRadius="15dp"
-        app:layout_constraintEnd_toEndOf="@+id/cardView4"
+
         app:layout_constraintStart_toEndOf="@+id/cardView5"
         app:layout_constraintTop_toTopOf="@+id/cardView5">
 
