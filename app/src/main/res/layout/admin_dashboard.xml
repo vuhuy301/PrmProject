@@ -93,7 +93,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:fontFamily="sans-serif-black"
-
                 android:text="Pending Order"
                 android:textColor="@color/black"
                 android:textSize="15sp"
