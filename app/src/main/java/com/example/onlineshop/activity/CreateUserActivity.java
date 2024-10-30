@@ -71,18 +71,45 @@ public class CreateUserActivity extends AppCompatActivity {
             Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show();
             return;
         }
-        String userId = databaseReference.push().getKey();
 
-        User user = new User(userId,name, email, password, null, null, true, role);
-        databaseReference.child(userId).setValue(user)
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        Toast.makeText(CreateUserActivity.this, "User created successfully", Toast.LENGTH_SHORT).show();
-                        finish(); // Quay lại activity trước đó
-                    } else {
-                        Toast.makeText(CreateUserActivity.this, "Failed to create user", Toast.LENGTH_SHORT).show();
-                    }
-                });
+
+        DatabaseReference userRef = databaseReference; // Không thêm "users"
+
+        userRef.get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                // Đếm số lượng người dùng hiện tại để tạo ID tự tăng
+                long nextId = task.getResult().getChildrenCount() + 1;
+
+                // Chuyển đổi nextId thành chuỗi để dùng làm userId
+                String userId = String.valueOf(nextId);
+                User user = new User(userId, name, email, password, null, null, true, role);
+
+                userRef.child(userId).setValue(user) // Lưu người dùng với userId là ID số
+                        .addOnCompleteListener(userTask -> {
+                            if (userTask.isSuccessful()) {
+                                Toast.makeText(CreateUserActivity.this, "User created successfully", Toast.LENGTH_SHORT).show();
+                                finish(); // Quay lại activity trước đó
+                            } else {
+                                Toast.makeText(CreateUserActivity.this, "Failed to create user", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+            } else {
+                Toast.makeText(CreateUserActivity.this, "Failed to get user count", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+//        String userId = databaseReference.push().getKey();
+//
+//        User user = new User(userId,name, email, password, null, null, true, role);
+//        databaseReference.child(userId).setValue(user)
+//                .addOnCompleteListener(task -> {
+//                    if (task.isSuccessful()) {
+//                        Toast.makeText(CreateUserActivity.this, "User created successfully", Toast.LENGTH_SHORT).show();
+//                        finish(); // Quay lại activity trước đó
+//                    } else {
+//                        Toast.makeText(CreateUserActivity.this, "Failed to create user", Toast.LENGTH_SHORT).show();
+//                    }
+//                });
 
 //        databaseReference.push().setValue(user)
 //                .addOnCompleteListener(task -> {
@@ -94,18 +121,6 @@ public class CreateUserActivity extends AppCompatActivity {
 //                        Toast.makeText(CreateUserActivity.this, "Failed to create user", Toast.LENGTH_SHORT).show();
 //                    }
 //                });
-//        DatabaseReference newUserRef = databaseReference.push(); // Tạo tham chiếu mới với ID tự động
-//
-//        newUserRef.setValue(user).addOnCompleteListener(task -> {
-//            if (task.isSuccessful()) {
-//                // Đã thêm người dùng thành công
-//                Toast.makeText(CreateUserActivity.this, "User created successfully", Toast.LENGTH_SHORT).show();
-//                // Quay lại AdminActivity
-//                finish();
-//            } else {
-//                // Thông báo lỗi
-//                Toast.makeText(CreateUserActivity.this, "Failed to create user", Toast.LENGTH_SHORT).show();
-//            }
-//        });
+
     }
 }
