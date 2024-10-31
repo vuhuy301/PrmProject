@@ -45,6 +45,9 @@ public class AdminActivity extends AppCompatActivity {
 
         CardView cardViewCreateUser = findViewById(R.id.cardViewCreateUser);
         cardViewCreateUser.setOnClickListener(v -> startActivity(new Intent(AdminActivity.this, CreateUserActivity.class)));
+
+        CardView cardViewOrder = findViewById(R.id.gotoOrder);
+        cardViewOrder.setOnClickListener(v -> startActivity(new Intent(AdminActivity.this, OrderManageActivity.class)));
     }
 
     private void fetchOrderData() {
