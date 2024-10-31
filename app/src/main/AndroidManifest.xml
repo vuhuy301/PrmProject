@@ -22,6 +22,9 @@
             android:name=".activity.SignInActivity"
             android:exported="false" />
         <activity
+            android:name=".activity.UserProfileActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.SignUpActivity"
             android:exported="false" />
         <activity

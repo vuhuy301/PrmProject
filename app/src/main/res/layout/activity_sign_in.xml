@@ -36,6 +36,16 @@
         android:text="Sign In"
         android:layout_marginTop="24dp" />
 
+
+    <TextView
+        android:id="@+id/tvForgotPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Forgot Password?"
+        android:textColor="@android:color/holo_blue_light"
+        android:layout_marginTop="16dp"
+        android:gravity="center"/>
+
     <TextView
         android:id="@+id/tvSwitchToSignUp"
         android:layout_width="wrap_content"
