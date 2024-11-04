@@ -1,0 +1,73 @@
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <ImageView
+        android:id="@+id/imageViewProfile"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:scaleType="centerCrop"
+        android:visibility="gone" />
+    <EditText
+        android:id="@+id/etUserId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="User ID"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:focusable="false" />
+
+    <EditText
+        android:id="@+id/etUserEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Email"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:focusable="false" />
+
+    <EditText
+        android:id="@+id/etUserName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Name"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:focusable="false" />
+
+
+    <EditText
+        android:id="@+id/etUserPhotoUrl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Photo URL"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:focusable="false" />
+
+    <TextView
+        android:id="@+id/tvEmailVerified"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Email Verified: "
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/btnEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Edit"
+        android:layout_marginTop="20dp" />
+
+    <Button
+        android:id="@+id/btnSignOut"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sign Out"
+        android:layout_marginTop="20dp" />
+</LinearLayout>

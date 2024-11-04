@@ -1,6 +1,9 @@
 package com.example.onlineshop.activity;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Window;
 
 import androidx.activity.EdgeToEdge;
@@ -15,6 +18,7 @@ import com.example.onlineshop.R;
 import com.example.onlineshop.adapter.PopularProductAdapter;
 import com.example.onlineshop.databinding.ActivityMainBinding;
 import com.example.onlineshop.model.Product;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -29,10 +33,21 @@ public class MainActivity extends AppCompatActivity {
     PopularProductAdapter adapter;
     ArrayList<Product> productList;
     DatabaseReference databaseReference;
+    SharedPreferences sharedPreferences;
+    private FirebaseAuth auth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
+        auth = FirebaseAuth.getInstance();
+        //clear roles
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.remove("userRole"); // Removes the entry associated with the key "userRole"
+        editor.apply();
+        startActivity(new Intent(MainActivity.this, SignInActivity.class));
+        finish();
+
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         EdgeToEdge.enable(this);
         setContentView(binding.getRoot());
@@ -98,6 +113,5 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
 
 }
