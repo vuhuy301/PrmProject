@@ -1,8 +1,13 @@
 package com.example.onlineshop.activity;
 
 import android.os.Bundle;
+import android.view.ContextMenu;
+import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -11,6 +16,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.onlineshop.R;
 import com.example.onlineshop.adapter.OrderItemAdapter;
 import com.example.onlineshop.model.OrderItem;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.List;
 
@@ -24,6 +32,10 @@ public class OrderDetailActivity extends AppCompatActivity {
     private TextView totalAmountTextView;
     private RecyclerView productsRecyclerView;
     private OrderItemAdapter orderItemAdapter;
+
+    private DatabaseReference order;
+    private String orderId;
+    private String id;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,7 +50,8 @@ public class OrderDetailActivity extends AppCompatActivity {
         totalAmountTextView = findViewById(R.id.textView10);
         productsRecyclerView = findViewById(R.id.productsRecyclerView);
 
-        String orderId = getIntent().getStringExtra("orderId");
+        id = getIntent().getStringExtra("id");
+        orderId = getIntent().getStringExtra("orderId");
         String name = getIntent().getStringExtra("orderName");
         String phone = getIntent().getStringExtra("orderPhone");
         String address = getIntent().getStringExtra("orderSp");
@@ -58,5 +71,47 @@ public class OrderDetailActivity extends AppCompatActivity {
         productsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         orderItemAdapter = new OrderItemAdapter(orderItems);
         productsRecyclerView.setAdapter(orderItemAdapter);
+
+        order = FirebaseDatabase.getInstance().getReference("order").child(id);
+        ImageView imageView = findViewById(R.id.imageView2);
+        registerForContextMenu(imageView);
+
+        ImageView backButton = findViewById(R.id.imageView8);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        if (v.getId() == R.id.imageView2) {
+            menu.setHeaderTitle("Chọn trạng thái");
+            menu.add(0, v.getId(), 0, "Chưa xác nhận");
+            menu.add(0, v.getId(), 1, "Đang giao");
+            menu.add(0, v.getId(), 2, "Đã giao");
+        }
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        String selectedStatus = item.getTitle().toString();
+        updateOrderStatusInFirebase(selectedStatus);
+        return super.onContextItemSelected(item);
+    }
+    private void updateOrderStatusInFirebase(String status) {
+        order.child("status").setValue(status)
+                .addOnSuccessListener(aVoid -> {
+                    orderStatusTextView.setText("Trạng thái: " + status);
+                    Toast.makeText(this, "", Toast.LENGTH_SHORT).makeText(OrderDetailActivity.this, "Đã cập nhật trạng thái: " + status, Toast.LENGTH_SHORT).show();
+                })
+                .addOnFailureListener(e -> {
+                    Toast.makeText(OrderDetailActivity.this, "Lỗi khi cập nhật trạng thái", Toast.LENGTH_SHORT).show();
+                });
+    }
+
+
+
 }

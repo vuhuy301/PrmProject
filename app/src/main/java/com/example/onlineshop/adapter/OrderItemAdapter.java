@@ -1,13 +1,17 @@
 package com.example.onlineshop.adapter;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.GranularRoundedCorners;
 import com.example.onlineshop.R;
 import com.example.onlineshop.model.OrderItem;
 
@@ -35,6 +39,19 @@ public class OrderItemAdapter extends RecyclerView.Adapter<OrderItemAdapter.Orde
         holder.productNameTextView.setText(orderItem.getProductName());
         holder.quantityTextView.setText("x" + orderItem.getQuantity());
         holder.priceTextView.setText("Giá: " + orderItem.getPrice() + " Đ");
+
+        Log.d("OrderItem", "Image Name: " + orderItem.getImages());
+        int drawableResourceId = holder.itemView.getContext().getResources().getIdentifier(orderItem.getImages(), "drawable", holder.itemView.getContext().getPackageName());
+
+
+        if (drawableResourceId != 0) {
+            Glide.with(holder.itemView.getContext())
+                    .load(drawableResourceId)
+                    .transform(new GranularRoundedCorners(30, 30, 0, 0)) // Nếu bạn cần làm tròn các góc
+                    .into(holder.image);
+        }
+
+
     }
 
     @Override
@@ -47,12 +64,14 @@ public class OrderItemAdapter extends RecyclerView.Adapter<OrderItemAdapter.Orde
         TextView productNameTextView;
         TextView quantityTextView;
         TextView priceTextView;
+        ImageView image;
 
         public OrderItemViewHolder(@NonNull View itemView) {
             super(itemView);
             productNameTextView = itemView.findViewById(R.id.productNameTextView);
             quantityTextView = itemView.findViewById(R.id.quantityTextView);
             priceTextView = itemView.findViewById(R.id.priceTextView);
+            image = itemView.findViewById(R.id.imageView7);
         }
     }
 }
