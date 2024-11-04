@@ -20,7 +20,7 @@ import com.google.firebase.auth.UserProfileChangeRequest;
 public class UserProfileActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
-    private EditText etUserId, etUserEmail, etUserName, etUserPhone, etUserPhotoUrl; // Changed to EditText
+    private EditText etUserId, etUserEmail, etUserName, etUserPhotoUrl; // Changed to EditText
     private TextView tvEmailVerified;
     private Button btnEdit, btnSignOut;
     private SharedPreferences sharedPreferences;
@@ -60,7 +60,6 @@ public class UserProfileActivity extends AppCompatActivity {
             if (!isEditing) {
                 // Enable editing
                 etUserName.setFocusableInTouchMode(true);
-                etUserPhone.setFocusableInTouchMode(true);
                 etUserPhotoUrl.setFocusableInTouchMode(true);
                 btnEdit.setText("Save");
             } else {
