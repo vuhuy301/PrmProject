@@ -24,6 +24,10 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
     public interface OnItemClickListener {
         void onItemClick(Order order);
     }
+    public void updateOrders(List<Order> orders) {
+        this.orderList = orders;
+        notifyDataSetChanged();
+    }
 
     public void setOnItemClickListener(OnItemClickListener listener) {
         this.listener = listener;

@@ -9,16 +9,19 @@ public class OrderItem implements Serializable {
     private int quantity;
     private double price;
     private double totalPrice;
+
+    private String images;
     public OrderItem() {
     }
 
-    public OrderItem(int otId, String productId, String productName, int quantity, double price, double totalPrice) {
+    public OrderItem(int otId, String productId, String productName, int quantity, double price, double totalPrice, String images) {
         this.otId = otId;
         this.productId = productId;
         this.productName = productName;
         this.quantity = quantity;
         this.price = price;
         this.totalPrice = totalPrice;
+        this.images = images;
     }
 
     public int getOtId() {
@@ -67,5 +70,13 @@ public class OrderItem implements Serializable {
 
     public void setTotalPrice(double totalPrice) {
         this.totalPrice = totalPrice;
+    }
+
+    public String getImages() {
+        return images;
+    }
+
+    public void setImages(String images) {
+        this.images = images;
     }
 }
