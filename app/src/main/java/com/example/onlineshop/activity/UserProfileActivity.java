@@ -5,13 +5,16 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.bumptech.glide.Glide;
 import com.example.onlineshop.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -23,6 +26,7 @@ public class UserProfileActivity extends AppCompatActivity {
     private EditText etUserId, etUserEmail, etUserName, etUserPhotoUrl; // Changed to EditText
     private TextView tvEmailVerified;
     private Button btnEdit, btnSignOut;
+    private ImageView imageViewProfile;
     private SharedPreferences sharedPreferences;
     private boolean isEditing = false; // Track editing state
 
@@ -39,17 +43,23 @@ public class UserProfileActivity extends AppCompatActivity {
         etUserName = findViewById(R.id.etUserName);
         tvEmailVerified = findViewById(R.id.tvEmailVerified);
         etUserPhotoUrl = findViewById(R.id.etUserPhotoUrl);
+        imageViewProfile = findViewById(R.id.imageViewProfile);
         btnEdit = findViewById(R.id.btnEdit); // Add edit button
         btnSignOut = findViewById(R.id.btnSignOut);
 
         // Display user details
         if (currentUser != null) {
-            Log.i("Users",mAuth.getCurrentUser().getEmail());
             etUserId.setText(currentUser.getUid());
             etUserEmail.setText(currentUser.getEmail());
             etUserName.setText(currentUser.getDisplayName() != null ? currentUser.getDisplayName() : "N/A");
             etUserPhotoUrl.setText(currentUser.getPhotoUrl() != null ? currentUser.getPhotoUrl().toString() : "N/A");
             tvEmailVerified.setText("User Role: " + getRoleFromSharedPrefs());
+            if (currentUser.getPhotoUrl()!=null) {
+                imageViewProfile.setVisibility(View.VISIBLE);
+                Glide.with(this).load(currentUser.getPhotoUrl().toString()).into(imageViewProfile);
+            } else {
+                imageViewProfile.setVisibility(View.GONE); // Hide the ImageView if no URL
+            }
         } else {
             Toast.makeText(this, "User not found!", Toast.LENGTH_SHORT).show();
             finish();
