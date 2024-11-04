@@ -1,33 +1,54 @@
-<!-- activity_user_detail.xml -->
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp">
 
-    <TextView
-        android:id="@+id/tvUserId"
-        android:layout_width="wrap_content"
+    <EditText
+        android:id="@+id/etUserId"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="User ID: "
+        android:hint="User ID"
         android:textSize="18sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:focusable="false" />
 
-    <TextView
-        android:id="@+id/tvUserEmail"
-        android:layout_width="wrap_content"
+    <EditText
+        android:id="@+id/etUserEmail"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Email: "
+        android:hint="Email"
         android:textSize="18sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:focusable="false" />
 
-    <TextView
-        android:id="@+id/tvUserName"
-        android:layout_width="wrap_content"
+    <EditText
+        android:id="@+id/etUserName"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Name: "
+        android:hint="Name"
         android:textSize="18sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:focusable="false" />
+
+    <EditText
+        android:id="@+id/etUserPhone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Phone Number"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:focusable="false" />
+
+    <EditText
+        android:id="@+id/etUserPhotoUrl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Photo URL"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:focusable="false" />
 
     <TextView
         android:id="@+id/tvEmailVerified"
@@ -36,6 +57,13 @@
         android:text="Email Verified: "
         android:textSize="18sp"
         android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/btnEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Edit"
+        android:layout_marginTop="20dp" />
 
     <Button
         android:id="@+id/btnSignOut"

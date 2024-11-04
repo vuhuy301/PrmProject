@@ -1,7 +1,9 @@
 package com.example.onlineshop.activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Window;
 
 import androidx.activity.EdgeToEdge;
@@ -31,16 +33,21 @@ public class MainActivity extends AppCompatActivity {
     PopularProductAdapter adapter;
     ArrayList<Product> productList;
     DatabaseReference databaseReference;
+    SharedPreferences sharedPreferences;
     private FirebaseAuth auth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
         auth = FirebaseAuth.getInstance();
-        if(auth.getCurrentUser()==null){
-            startActivity(new Intent(MainActivity.this, SignInActivity.class));
-            finish();
-        }
+        //clear roles
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.remove("userRole"); // Removes the entry associated with the key "userRole"
+        editor.apply();
+        startActivity(new Intent(MainActivity.this, SignInActivity.class));
+        finish();
+
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         EdgeToEdge.enable(this);
         setContentView(binding.getRoot());
@@ -106,6 +113,5 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
 
 }

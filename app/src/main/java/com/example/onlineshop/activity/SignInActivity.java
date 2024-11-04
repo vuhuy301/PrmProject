@@ -1,6 +1,7 @@
 package com.example.onlineshop.activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -17,11 +18,18 @@ import com.example.onlineshop.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class SignInActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     private EditText etEmailSignIn, etPasswordSignIn;
+    private DatabaseReference db;
+    private SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +37,8 @@ public class SignInActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sign_in);
 
         mAuth = FirebaseAuth.getInstance();
+        db = FirebaseDatabase.getInstance().getReference();
+        sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
         mAuth.getFirebaseAuthSettings().setAppVerificationDisabledForTesting(true);
         mAuth.getFirebaseAuthSettings().forceRecaptchaFlowForTesting(false);
         etEmailSignIn = findViewById(R.id.etEmailSignIn);
@@ -64,7 +74,32 @@ public class SignInActivity extends AppCompatActivity {
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         Toast.makeText(SignInActivity.this, "Login Successful!", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(SignInActivity.this, MainActivity.class));
+                        DatabaseReference roleRef = db.child("users").child(mAuth.getCurrentUser().getUid());
+                        roleRef.get().addOnCompleteListener(task2 -> {
+                            if (task2.isSuccessful()) {
+                                DataSnapshot dataSnapshot = task2.getResult();
+                                if (dataSnapshot.exists()) {
+                                    // Retrieve the role value
+                                    String role = dataSnapshot.getValue(String.class); // Assuming role is a String
+                                    Log.d("FirebaseRole", "User role is: " + role);
+
+                                    // Save the role in Shared Preferences
+                                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                                    editor.putString("userRole", role); // Store the role with the key "userRole"
+                                    editor.apply(); // Commit the changes
+                                } else {
+                                    Log.d("FirebaseRole", "Role does not exist in the database.");
+                                }
+                            } else {
+                                Log.e("FirebaseRole", "Error getting data: ", task2.getException());
+                            }
+                        });
+                        try {
+                            Thread.sleep(1000); //Role take time to fetch
+                        } catch (InterruptedException e) {
+                            throw new RuntimeException(e);
+                        }
+                        startActivity(new Intent(SignInActivity.this, UserProfileActivity.class));
                         finish();
                     } else {
                         Toast.makeText(SignInActivity.this, "Login Failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();

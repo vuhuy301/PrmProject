@@ -17,10 +17,16 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class SignUpActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
+    private DatabaseReference db;
     private EditText etEmailSignUp, etPasswordSignUp;
 
     @Override
@@ -29,6 +35,7 @@ public class SignUpActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sign_up);
 
         mAuth = FirebaseAuth.getInstance();
+        db = FirebaseDatabase.getInstance().getReference();
         mAuth.getFirebaseAuthSettings().setAppVerificationDisabledForTesting(true);
         mAuth.getFirebaseAuthSettings().forceRecaptchaFlowForTesting(false);
         etEmailSignUp = findViewById(R.id.etEmailSignUp);
@@ -64,11 +71,23 @@ public class SignUpActivity extends AppCompatActivity {
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
+                        assignRoleToUser(mAuth.getCurrentUser().getUid(),"user");
                         Toast.makeText(SignUpActivity.this, "Sign-Up Successful!", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(SignUpActivity.this, MainActivity.class));
+                        startActivity(new Intent(SignUpActivity.this, SignInActivity.class));
                         finish();
                     } else {
                         Toast.makeText(SignUpActivity.this, "Sign-Up Failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+    private void assignRoleToUser(String uid, String role) {
+        // Store the role in Realtime Database
+        db.child("users").child(uid).setValue(role)
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        Log.d("SignUpActivity", "User role assigned successfully");
+                    } else {
+                        Log.e("SignUpActivity", "Error assigning role: " + task.getException().getMessage());
                     }
                 });
     }
