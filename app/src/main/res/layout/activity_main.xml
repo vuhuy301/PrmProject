@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+    android:id="@+id/ConstrainLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF"
@@ -401,8 +401,8 @@
 
                     <ImageView
                         android:id="@+id/imageView67"
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="11dp"
                         android:layout_gravity="center"
 
                         android:src="@drawable/btn_2" />
@@ -450,8 +450,8 @@
 
                     <ImageView
                         android:id="@+id/imageView69"
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
+                        android:layout_width="17dp"
+                        android:layout_height="16dp"
                         android:layout_gravity="center"
 
                         android:src="@drawable/btn_3" />
