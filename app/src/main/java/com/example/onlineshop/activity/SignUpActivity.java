@@ -72,6 +72,9 @@ public class SignUpActivity extends AppCompatActivity {
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         assignRoleToUser(mAuth.getCurrentUser().getUid(),"user");
+                        assignStatusToUser(mAuth.getCurrentUser().getUid(), "true");
+                        assignAddressToUser(mAuth.getCurrentUser().getUid(),"Hanoi");
+                        assignPhoneNumberToUser(mAuth.getCurrentUser().getUid(),"+84");
                         Toast.makeText(SignUpActivity.this, "Sign-Up Successful!", Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(SignUpActivity.this, SignInActivity.class));
                         finish();
@@ -82,12 +85,44 @@ public class SignUpActivity extends AppCompatActivity {
     }
     private void assignRoleToUser(String uid, String role) {
         // Store the role in Realtime Database
-        db.child("users").child(uid).setValue(role)
+        db.child("users").child(uid).child("roles").setValue(role)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         Log.d("SignUpActivity", "User role assigned successfully");
                     } else {
                         Log.e("SignUpActivity", "Error assigning role: " + task.getException().getMessage());
+                    }
+                });
+    }
+    private void assignStatusToUser(String uid, String status){
+        db.child("users").child(uid).child("status").setValue(status)
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        Log.d("SignUpActivity", "User status assigned successfully");
+                    } else {
+                        Log.e("SignUpActivity", "Error assigning status: " + task.getException().getMessage());
+                    }
+                });
+    }
+    private void assignAddressToUser(String uid, String address) {
+        // Store the role in Realtime Database
+        db.child("users").child(uid).child("address").setValue(address)
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        Log.d("SignUpActivity", "User address assigned successfully");
+                    } else {
+                        Log.e("SignUpActivity", "Error assigning address: " + task.getException().getMessage());
+                    }
+                });
+    }
+    private void assignPhoneNumberToUser(String uid, String phone) {
+        // Store the role in Realtime Database
+        db.child("users").child(uid).child("phone").setValue(phone)
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        Log.d("SignUpActivity", "User phone assigned successfully");
+                    } else {
+                        Log.e("SignUpActivity", "Error assigning phone: " + task.getException().getMessage());
                     }
                 });
     }

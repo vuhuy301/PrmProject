@@ -24,6 +24,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.Objects;
+
 public class SignInActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
@@ -61,6 +63,7 @@ public class SignInActivity extends AppCompatActivity {
         String email = etEmailSignIn.getText().toString().trim();
         String password = etPasswordSignIn.getText().toString().trim();
 
+
         if (TextUtils.isEmpty(email)) {
             etEmailSignIn.setError("Email is required.");
             return;
@@ -73,9 +76,8 @@ public class SignInActivity extends AppCompatActivity {
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        Toast.makeText(SignInActivity.this, "Login Successful!", Toast.LENGTH_SHORT).show();
-                        DatabaseReference roleRef = db.child("users").child(mAuth.getCurrentUser().getUid());
-                        roleRef.get().addOnCompleteListener(task2 -> {
+                        DatabaseReference userRef = db.child("users").child(mAuth.getCurrentUser().getUid());
+                        userRef.child("roles").get().addOnCompleteListener(task2 -> {
                             if (task2.isSuccessful()) {
                                 DataSnapshot dataSnapshot = task2.getResult();
                                 if (dataSnapshot.exists()) {
@@ -94,13 +96,70 @@ public class SignInActivity extends AppCompatActivity {
                                 Log.e("FirebaseRole", "Error getting data: ", task2.getException());
                             }
                         });
-                        try {
-                            Thread.sleep(1000); //Role take time to fetch
-                        } catch (InterruptedException e) {
-                            throw new RuntimeException(e);
+                        userRef.child("status").get().addOnCompleteListener(task3 -> {
+                            if (task3.isSuccessful()) {
+                                DataSnapshot dataSnapshot = task3.getResult();
+                                if (dataSnapshot.exists()) {
+                                    // Retrieve the role value
+                                    String status = dataSnapshot.getValue(String.class);
+                                    // Assuming role is a String
+                                    Log.d("FirebaseStatus", "User status is: " + status);
+                                    if(Objects.equals(status, "false")){
+                                        Toast.makeText(SignInActivity.this, "Login Failed: User inactive", Toast.LENGTH_SHORT).show();
+                                        return;
+                                    }
+                                    // Save the role in Shared Preferences
+                                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                                    editor.putString("userStatus", status); // Store the role with the key "userRole"
+                                    editor.apply(); // Commit the changes
+                                } else {
+                                    Log.d("FirebaseStatus", "Status does not exist in the database.");
+                                }
+                            } else {
+                                Log.e("FirebaseStatus", "Error getting data: ", task3.getException());
+                            }
+                        });
+                        userRef.child("address").get().addOnCompleteListener(task3 -> {
+                            if (task3.isSuccessful()) {
+                                DataSnapshot dataSnapshot = task3.getResult();
+                                if (dataSnapshot.exists()) {
+                                    // Retrieve the role value
+                                    String address = dataSnapshot.getValue(String.class); // Assuming role is a String
+                                    Log.d("FirebaseAddress", "User address is: " + address);
+                                    // Save the role in Shared Preferences
+                                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                                    editor.putString("userAddress", address); // Store the role with the key "userRole"
+                                    editor.apply(); // Commit the changes
+                                } else {
+                                    Log.d("FirebaseStatus", "Status does not exist in the database.");
+                                }
+                            } else {
+                                Log.e("FirebaseStatus", "Error getting data: ", task3.getException());
+                            }
+                        });
+                        userRef.child("phone").get().addOnCompleteListener(task3 -> {
+                            if (task3.isSuccessful()) {
+                                DataSnapshot dataSnapshot = task3.getResult();
+                                if (dataSnapshot.exists()) {
+                                    // Retrieve the role value
+                                    String phone = dataSnapshot.getValue(String.class); // Assuming role is a String
+                                    Log.d("FirebasePhone", "User phone is: " + phone);
+                                    // Save the role in Shared Preferences
+                                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                                    editor.putString("userPhone", phone); // Store the role with the key "userRole"
+                                    editor.apply(); // Commit the changes
+                                } else {
+                                    Log.d("FirebaseStatus", "Status does not exist in the database.");
+                                }
+                            } else {
+                                Log.e("FirebaseStatus", "Error getting data: ", task3.getException());
+                            }
+                        });
+                        if(getStatusFromSharedPrefs().equals("true")){
+                            Toast.makeText(SignInActivity.this, "Login Successful!", Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(SignInActivity.this, UserProfileActivity.class));
+                            finish();
                         }
-                        startActivity(new Intent(SignInActivity.this, UserProfileActivity.class));
-                        finish();
                     } else {
                         Toast.makeText(SignInActivity.this, "Login Failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                     }
@@ -140,6 +199,13 @@ public class SignInActivity extends AppCompatActivity {
                         Toast.makeText(SignInActivity.this, "Error: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
+    }
+
+    public String getStatusFromSharedPrefs() {
+        SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
+        String status = sharedPreferences.getString("userStatus", "user"); // "user" is the default value
+        Log.d("SharedPrefsStatus", "Retrieved user status: " + status);
+        return status;
     }
 }
 
