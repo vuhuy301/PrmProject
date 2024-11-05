@@ -155,6 +155,42 @@ public class SignInActivity extends AppCompatActivity {
                                 Log.e("FirebaseStatus", "Error getting data: ", task3.getException());
                             }
                         });
+                        userRef.child("email").get().addOnCompleteListener(task3 -> {
+                            if (task3.isSuccessful()) {
+                                DataSnapshot dataSnapshot = task3.getResult();
+                                if (dataSnapshot.exists()) {
+                                    // Retrieve the role value
+                                    String uEmail = dataSnapshot.getValue(String.class); // Assuming role is a String
+                                    Log.d("FirebasePhone", "User email is: " + uEmail);
+                                    // Save the role in Shared Preferences
+                                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                                    editor.putString("userEmail", uEmail); // Store the role with the key "userRole"
+                                    editor.apply(); // Commit the changes
+                                } else {
+                                    Log.d("FirebaseStatus", "Status does not exist in the database.");
+                                }
+                            } else {
+                                Log.e("FirebaseStatus", "Error getting data: ", task3.getException());
+                            }
+                        });
+                        userRef.child("name").get().addOnCompleteListener(task3 -> {
+                            if (task3.isSuccessful()) {
+                                DataSnapshot dataSnapshot = task3.getResult();
+                                if (dataSnapshot.exists()) {
+                                    // Retrieve the role value
+                                    String uName = dataSnapshot.getValue(String.class); // Assuming role is a String
+                                    Log.d("FirebasePhone", "User name is: " + uName);
+                                    // Save the role in Shared Preferences
+                                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                                    editor.putString("userName", uName); // Store the role with the key "userRole"
+                                    editor.apply(); // Commit the changes
+                                } else {
+                                    Log.d("FirebaseStatus", "Status does not exist in the database.");
+                                }
+                            } else {
+                                Log.e("FirebaseStatus", "Error getting data: ", task3.getException());
+                            }
+                        });
                         if(getStatusFromSharedPrefs().equals("true")){
                             Toast.makeText(SignInActivity.this, "Login Successful!", Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(SignInActivity.this, UserProfileActivity.class));

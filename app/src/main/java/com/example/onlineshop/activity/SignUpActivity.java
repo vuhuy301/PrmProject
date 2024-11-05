@@ -75,6 +75,8 @@ public class SignUpActivity extends AppCompatActivity {
                         assignStatusToUser(mAuth.getCurrentUser().getUid(), "true");
                         assignAddressToUser(mAuth.getCurrentUser().getUid(),"Hanoi");
                         assignPhoneNumberToUser(mAuth.getCurrentUser().getUid(),"+84");
+                        assignEmailToUser(mAuth.getCurrentUser().getUid(), mAuth.getCurrentUser().getEmail());
+                        assignNameToUser(mAuth.getCurrentUser().getUid(),"New User!");
                         Toast.makeText(SignUpActivity.this, "Sign-Up Successful!", Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(SignUpActivity.this, SignInActivity.class));
                         finish();
@@ -91,6 +93,28 @@ public class SignUpActivity extends AppCompatActivity {
                         Log.d("SignUpActivity", "User role assigned successfully");
                     } else {
                         Log.e("SignUpActivity", "Error assigning role: " + task.getException().getMessage());
+                    }
+                });
+    }
+    private void assignEmailToUser(String uid, String email) {
+        // Store the role in Realtime Database
+        db.child("users").child(uid).child("email").setValue(email)
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        Log.d("SignUpActivity", "User email assigned successfully");
+                    } else {
+                        Log.e("SignUpActivity", "Error assigning email: " + task.getException().getMessage());
+                    }
+                });
+    }
+    private void assignNameToUser(String uid, String name) {
+        // Store the role in Realtime Database
+        db.child("users").child(uid).child("name").setValue(name)
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        Log.d("SignUpActivity", "User name assigned successfully");
+                    } else {
+                        Log.e("SignUpActivity", "Error assigning name: " + task.getException().getMessage());
                     }
                 });
     }
