@@ -27,8 +27,9 @@ public class CartService {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
                     Cart cart = dataSnapshot.getValue(Cart.class);
-                    boolean isCartItemExit = false;
+
                     if (cart.getItems() != null) {
+                        boolean isCartItemExit = false;
                         for (int i = 0; i < cart.getItems().size(); i++) {
                             CartItem cartItemm = cart.getItems().get(i);
                             if (cartItem.getProductId().equals(cartItemm.getProductId())) {
@@ -38,12 +39,15 @@ public class CartService {
                                 break;
                             }
                         }
-                    }
-                    if (!isCartItemExit) {
+                        if (!isCartItemExit) {
+                            cart.getItems().add(cartItem);
+                        }
+                    }else {
                         List<CartItem> cartItems = new ArrayList<>();
                         cartItems.add(cartItem);
                         cart = new Cart(userid, cartItems);
                     }
+
                     databaseReference.child(userid).setValue(cart);
                     onCompleteListener.onComplete(true, "Thêm giỏ hàng thành công");
                 } else {
