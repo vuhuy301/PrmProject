@@ -1,6 +1,8 @@
 package com.example.onlineshop.activity;
+
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Window;
 
 import androidx.activity.EdgeToEdge;
@@ -89,12 +91,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 productList.clear();
-                for(DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     Product product = snapshot.getValue(Product.class);
                     productList.add(product);
                 }
 
-                    adapter.notifyDataSetChanged();
+                adapter.notifyDataSetChanged();
             }
 
             @Override

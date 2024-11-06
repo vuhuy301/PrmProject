@@ -6,6 +6,9 @@ public class Cart {
     private String userId;
     private List<CartItem> items;
 
+    public Cart() {
+    }
+
     public Cart(String userId, List<CartItem> items) {
         this.userId = userId;
         this.items = items;

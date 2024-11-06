@@ -13,75 +13,134 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.onlineshop.R;
 import com.example.onlineshop.adapter.CartAdapter;
+import com.example.onlineshop.databinding.ActivityCartBinding;
+import com.example.onlineshop.model.Cart;
 import com.example.onlineshop.model.CartItem;
-import com.example.onlineshop.services.CartService;
+import com.example.onlineshop.model.User;
+import com.example.onlineshop.service.CartService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CartActivity extends AppCompatActivity {
 
-    private RecyclerView cartView;
     private CartAdapter cartAdapter;
-    private TextView totalFeeTxt, totalTxt, taxTxt, deliveryTxt, emptyTxt;
+    private ActivityCartBinding binding;
     private CartService cartService;
-    private List<CartItem> cartItems;
+    private Cart cart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cart);
+        binding = ActivityCartBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
-        // Initialize views
-        cartView = findViewById(R.id.cartView);
-        totalFeeTxt = findViewById(R.id.totalFeeTxt);
-        totalTxt = findViewById(R.id.totalTxt);
-        taxTxt = findViewById(R.id.taxTxt);
-        deliveryTxt = findViewById(R.id.deliveryTxt);
-        emptyTxt = findViewById(R.id.emptyTxt);
-
-        // Set default values
-        taxTxt.setText("0");
-        deliveryTxt.setText("0");
-
-        // Initialize CartService (assuming this is your data provider)
         cartService = new CartService();
 
-        // Get cart items for userId = 1
-        cartItems = cartService.getCartItemsForUser(1);
+        cartService.getCart("1", new CartService.OnGetCartListener() {
+            @Override
+            public void onGetCartSuccess(Cart cartt) {
+                cart = cartt;
+                if (cart.getItems().isEmpty()) {
+                    binding.emptyTxt.setVisibility(View.VISIBLE);
+                    binding.cartView.setVisibility(View.GONE);
+                } else {
+                    binding.emptyTxt.setVisibility(View.GONE);
+                    binding.cartView.setVisibility(View.VISIBLE);
+                    setUpRecyclerView();
+                    calculateTotals();
+                }
+            }
 
-        if (cartItems.isEmpty()) {
-            emptyTxt.setVisibility(View.VISIBLE);
-            cartView.setVisibility(View.GONE);
-        } else {
-            emptyTxt.setVisibility(View.GONE);
-            cartView.setVisibility(View.VISIBLE);
-            setUpRecyclerView();
-            calculateTotals();
-        }
+            @Override
+            public void onGetCartFailure(String message) {
 
-        // Set up back button functionality
-        ImageView backBtn = findViewById(R.id.backBtn);
-        backBtn.setOnClickListener(v -> onBackPressed());
+            }
+        });
 
+        binding.backBtn.setOnClickListener(v -> onBackPressed());
+
+        binding.button2.setOnClickListener(v -> {
+            User fakeUser = new User("1" , "Usertest", "nguyenthitha@example.com", "password123", "456 Tran Hung Dao, Hanoi", "0123456789", true, "customer");
+            cartService.orderCart(fakeUser, cart, new CartService.OnCompleteListener() {
+                @Override
+                public void onComplete(boolean isSuccess, String mes) {
+                    if(isSuccess){
+                        Toast.makeText(CartActivity.this, mes, Toast.LENGTH_SHORT).show();
+                        finish();
+                    }else {
+                        Toast.makeText(CartActivity.this, mes, Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+        });
     }
 
     private void setUpRecyclerView() {
-        cartAdapter = new CartAdapter(cartItems);
-        cartView.setLayoutManager(new LinearLayoutManager(this));
-        cartView.setAdapter(cartAdapter);
+        cartAdapter = new CartAdapter(cart.getItems(), new CartAdapter.onUpdateListener() {
+            @Override
+            public void onUpdate(int position, CartItem cartItem) {
+                cart.getItems().set(position, cartItem);
+                cartService.updateCart(cart, "1", new CartService.OnGetCartListener() {
+                    @Override
+                    public void onGetCartSuccess(Cart cartt) {
+                        cart = cartt;
+                        if (cart.getItems().isEmpty()) {
+                            binding.emptyTxt.setVisibility(View.VISIBLE);
+                            binding.cartView.setVisibility(View.GONE);
+                        } else {
+                            binding.emptyTxt.setVisibility(View.GONE);
+                            binding.cartView.setVisibility(View.VISIBLE);
+                            cartAdapter.updateCartItems(cart.getItems());
+                            calculateTotals();
+                        }
+                    }
+
+                    @Override
+                    public void onGetCartFailure(String message) {
+
+                    }
+                });
+            }
+
+            @Override
+            public void onDelete(int position) {
+                cart.getItems().remove(position);
+                cartService.updateCart(cart, "1", new CartService.OnGetCartListener() {
+                    @Override
+                    public void onGetCartSuccess(Cart cartt) {
+                        cart = cartt;
+                        if (cart.getItems().isEmpty()) {
+                            binding.emptyTxt.setVisibility(View.VISIBLE);
+                            binding.cartView.setVisibility(View.GONE);
+                        } else {
+                            binding.emptyTxt.setVisibility(View.GONE);
+                            binding.cartView.setVisibility(View.VISIBLE);
+                            cartAdapter.updateCartItems(cart.getItems());
+                            calculateTotals();
+                        }
+                    }
+
+                    @Override
+                    public void onGetCartFailure(String message) {
+
+                    }
+                });
+            }
+        });
+        binding.cartView.setLayoutManager(new LinearLayoutManager(this));
+        binding.cartView.setAdapter(cartAdapter);
     }
 
     private void calculateTotals() {
         double total = 0;
 
-        for (CartItem item : cartItems) {
+        for (CartItem item : cart.getItems()) {
             total += item.getPrice() * item.getQuantity();
         }
 
-        totalFeeTxt.setText(String.format("$%.2f", total));
-        totalTxt.setText(String.format("$%.2f", total));
+        binding.totalFeeTxt.setText(String.format("$%.2f", total));
+        binding.totalTxt.setText(String.format("$%.2f", total));
 
-        // Example of how tax and delivery could be set if you had logic for those
-        // For now, they are set to 0
     }
 }

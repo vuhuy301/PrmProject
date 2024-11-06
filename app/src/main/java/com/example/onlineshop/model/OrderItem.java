@@ -9,8 +9,8 @@ public class OrderItem implements Serializable {
     private int quantity;
     private double price;
     private double totalPrice;
-
     private String images;
+
     public OrderItem() {
     }
 

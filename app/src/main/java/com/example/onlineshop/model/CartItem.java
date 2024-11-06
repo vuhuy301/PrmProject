@@ -7,17 +7,30 @@ public class CartItem {
     private String name;
     private int quantity;
     private double price;
+    private String images;
 
-    public CartItem(int ciId, String productId, String name, int quantity, double price) {
+    public CartItem() {
+    }
+
+    public CartItem(int ciId, String productId, String name, int quantity, double price, String images) {
         this.ciId = ciId;
         this.productId = productId;
         this.name = name;
         this.quantity = quantity;
         this.price = price;
+        this.images = images;
     }
 
     public int getCiId() {
         return ciId;
+    }
+
+    public String getImages() {
+        return images;
+    }
+
+    public void setImages(String images) {
+        this.images = images;
     }
 
     public void setCiId(int ciId) {

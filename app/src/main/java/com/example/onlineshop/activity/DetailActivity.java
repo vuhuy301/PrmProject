@@ -1,21 +1,17 @@
 package com.example.onlineshop.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.bitmap.GranularRoundedCorners;
-import com.example.onlineshop.R;
-import com.example.onlineshop.adapter.PopularProductAdapter;
-import com.example.onlineshop.databinding.ActivityDetailBinding;
-import com.example.onlineshop.databinding.ActivityMainBinding;
 import com.example.onlineshop.databinding.ProductDetailBinding;
+import com.example.onlineshop.model.CartItem;
 import com.example.onlineshop.model.Product;
+import com.example.onlineshop.service.CartService;
 
 public class DetailActivity extends AppCompatActivity {
 
@@ -31,6 +27,23 @@ public class DetailActivity extends AppCompatActivity {
 
         getBundles();
         binding.backBtn.setOnClickListener(v -> finish());
+
+        binding.buyBtnDetail.setOnClickListener(v -> {
+            CartItem cartItem = new CartItem(0, object.getProductId(), object.getName(), 1, object.getPrice(), object.getImages());
+            CartService cartService = new CartService();
+            cartService.addCartItem(cartItem, "1", new CartService.OnCompleteListener() {
+                @Override
+                public void onComplete(boolean isSuccess, String mes) {
+                    if(isSuccess){
+                        Toast.makeText(DetailActivity.this, mes, Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(DetailActivity.this, CartActivity.class));
+                        finish();
+                    }else {
+                        Toast.makeText(DetailActivity.this, mes, Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+        });
     }
 
     private void getBundles() {
