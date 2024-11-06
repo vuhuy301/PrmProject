@@ -18,9 +18,9 @@
         <activity
             android:name=".activity.CreateUserActivity"
             android:exported="false" />
-        <activity
+        <!--<activity
             android:name=".activity.MainActivity"
-            android:exported="false" />
+            android:exported="false" />-->
         <activity
             android:name=".activity.UserDetailActivity"
             android:exported="false" />
@@ -40,7 +40,7 @@
             android:name=".activity.OrderDetailActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.AdminActivity"
+            android:name=".activity.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

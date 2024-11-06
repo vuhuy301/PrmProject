@@ -42,7 +42,7 @@ public class OrderDetailActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.order_detail);
-        userRole = "admin";
+        userRole = "shipper";
         orderIdTextView = findViewById(R.id.orderId);
         nameTextView = findViewById(R.id.name);
         phoneTextView = findViewById(R.id.phone);

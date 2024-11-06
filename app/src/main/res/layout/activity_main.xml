@@ -189,8 +189,8 @@
                     <ImageView
                         android:id="@+id/imageView51"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:srcCompat="@drawable/cat1" />
+                        android:layout_height="55dp"
+                        app:srcCompat="@drawable/laptop10" />
 
                     <TextView
                         android:id="@+id/textView61"
@@ -214,8 +214,8 @@
                     <ImageView
                         android:id="@+id/imageView52"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:srcCompat="@drawable/cat2" />
+                        android:layout_height="55dp"
+                        app:srcCompat="@drawable/laptop6" />
 
                     <TextView
                         android:id="@+id/textView62"
@@ -337,7 +337,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/PopularView"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="276dp"
                 android:clipToPadding="false"
                 android:paddingStart="12dp"
                 android:paddingEnd="12dp"
@@ -347,8 +347,8 @@
     </ScrollView>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
-        android:layout_width="match_parent"
-        android:layout_height="110dp"
+        android:layout_width="436dp"
+        android:layout_height="58dp"
         app:layout_constraintBottom_toBottomOf="@+id/scrollView2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -490,15 +490,6 @@
             </LinearLayout>
         </com.google.android.material.bottomappbar.BottomAppBar>
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/qrcode"
-            app:backgroundTint="@color/purple_Dark"
-            app:layout_anchor="@id/appBar"
-            app:maxImageSize="30dp"
-            app:tint="@color/white"
-            android:contentDescription="@string/fab_qrcode_description"/>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
     
 </androidx.constraintlayout.widget.ConstraintLayout>

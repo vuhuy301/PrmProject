@@ -44,10 +44,10 @@ public class OrderManageActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.list_order);
-    userRole = "admin";
+    userRole = "shipper";
         Spinner statusSpinner = findViewById(R.id.statusSpinner);
         if ("admin".equals(userRole)) {
-            orderStatuses = new String[]{"Tất cả", "Chưa xác nhận", "Đã xác nhận", "Đang giao", "Giao thành công"};
+            orderStatuses = new String[]{"Tất cả", "Chưa xác nhận", "Đã xác nhận", "Đang giao", "Giao thành công", "Đã hủy", "Giao không thành công"};
         } else if ("shipper".equals(userRole)) {
             orderStatuses = new String[]{"Tất cả", "Đã xác nhận", "Đang giao", "Giao thành công"};
         }
