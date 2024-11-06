@@ -45,7 +45,11 @@
                 app:layout_constraintVertical_bias="0.484" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
-
+    <Spinner
+        android:id="@+id/statusSpinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"/>
     <!-- RecyclerView để hiển thị danh sách đơn hàng -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewOrders"

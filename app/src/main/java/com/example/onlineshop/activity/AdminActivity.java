@@ -64,10 +64,10 @@ public class AdminActivity extends AppCompatActivity {
                     if (order != null) {
                         // Sử dụng đúng giá trị trạng thái "processing" và "success"
                         switch (order.getStatus()) {
-                            case "Processing": // Trạng thái đang xử lý
+                            case "Đang giao": // Trạng thái đang xử lý
                                 pendingOrdersCount++;
                                 break;
-                            case "Shipped": // Trạng thái hoàn thành
+                            case "Đã giao": // Trạng thái hoàn thành
                                 completedOrdersCount++;
                                 totalEarnings += order.getTotalAmount();
                                 break;
