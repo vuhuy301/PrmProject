@@ -384,10 +384,11 @@
                         android:src="@drawable/btn_1" />
 
                     <TextView
+                        android:id="@+id/textViewOrder"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
-                        android:text="Explorer"
+                        android:text="Order"
                         android:textAlignment="center"
 
                         />

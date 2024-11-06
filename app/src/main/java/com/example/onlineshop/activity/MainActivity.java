@@ -53,6 +53,10 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(MainActivity.this, CartActivity.class);
             startActivity(intent);
         });
+        binding.imageView66.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, OrderManageActivity.class); // Chuyển tới màn OrderListActivity
+            startActivity(intent);
+        });
 
         binding.categoryLayoutAll.setOnClickListener(v -> fetchProducts());
     }
