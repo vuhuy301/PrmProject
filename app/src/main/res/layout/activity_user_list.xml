@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-
-    <!-- Toolbar với nút back và tiêu đề -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="52dp"
@@ -17,9 +14,8 @@
             android:layout_height="match_parent"
             android:background="#6200ED">
 
-
             <ImageView
-                android:id="@+id/imageView4"
+                android:id="@+id/imageView8"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
@@ -30,29 +26,45 @@
                 app:srcCompat="@drawable/arrow" />
 
             <TextView
-                android:id="@+id/textView6"
+                android:id="@+id/textView9"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Quản lý đơn hàng"
+                android:text="Danh sách người dùng"
                 android:textColor="#FFFFFF"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/imageView4"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.484" />
+                app:layout_constraintVertical_bias="0.5" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
-    <Spinner
-        android:id="@+id/statusSpinner"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"/>
-    <!-- RecyclerView để hiển thị danh sách đơn hàng -->
+        android:orientation="horizontal"
+        android:padding="8dp"
+        android:background="#EEEEEE">
+
+        <!-- Search by Name -->
+        <EditText
+            android:id="@+id/searchEditText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="Search by name"
+            android:inputType="text" />
+
+        <!-- Filter by Role -->
+        <Spinner
+            android:id="@+id/roleSpinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:entries="@array/role_options" />
+    </LinearLayout>
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewOrders"
+        android:id="@+id/recyclerViewUsers"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="8dp"/>

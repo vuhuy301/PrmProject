@@ -1,22 +1,27 @@
 package com.example.onlineshop.model;
 
-public class OrderItem {
+import java.io.Serializable;
+
+public class OrderItem implements Serializable {
     private int otId;
     private String productId;
-    private String name;
+    private String productName;
     private int quantity;
     private double price;
     private double totalPrice;
+
+    private String images;
     public OrderItem() {
     }
 
-    public OrderItem(int otId, String productId, String name, int quantity, double price, double totalPrice) {
+    public OrderItem(int otId, String productId, String productName, int quantity, double price, double totalPrice, String images) {
         this.otId = otId;
         this.productId = productId;
-        this.name = name;
+        this.productName = productName;
         this.quantity = quantity;
         this.price = price;
         this.totalPrice = totalPrice;
+        this.images = images;
     }
 
     public int getOtId() {
@@ -35,12 +40,12 @@ public class OrderItem {
         this.productId = productId;
     }
 
-    public String getName() {
-        return name;
+    public String getProductName() {
+        return productName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setProductName(String productName) {
+        this.productName = productName;
     }
 
     public int getQuantity() {
@@ -65,5 +70,13 @@ public class OrderItem {
 
     public void setTotalPrice(double totalPrice) {
         this.totalPrice = totalPrice;
+    }
+
+    public String getImages() {
+        return images;
+    }
+
+    public void setImages(String images) {
+        this.images = images;
     }
 }

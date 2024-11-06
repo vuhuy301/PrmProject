@@ -41,7 +41,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
 
-    <!-- Mã đơn hàng -->
+
     <TextView
         android:id="@+id/orderId"
         android:layout_width="wrap_content"
@@ -52,7 +52,7 @@
         android:textSize="18sp"
         android:layout_marginLeft="5dp"/>
 
-    <!-- Tên khách hàng -->
+
     <TextView
         android:id="@+id/name"
         android:layout_width="wrap_content"
@@ -63,7 +63,6 @@
         android:textSize="16sp"
         android:layout_marginLeft="5dp"/>
 
-    <!-- Ngày đặt hàng -->
 
     <TextView
         android:id="@+id/phone"
@@ -95,7 +94,6 @@
         android:textSize="16sp"
         android:layout_marginLeft="5dp"/>
 
-    <!-- Trạng thái đơn hàng với biểu tượng chỉnh sửa -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -105,7 +103,7 @@
 
         <TextView
             android:id="@+id/orderStatus"
-            android:layout_width="163dp"
+            android:layout_width="228dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="Trạng thái: Đã giao"
@@ -132,8 +130,7 @@
 
 
     </LinearLayout>
-
-    <!-- Danh sách sản phẩm trong đơn hàng -->
+    
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/productsRecyclerView"
         android:layout_width="match_parent"

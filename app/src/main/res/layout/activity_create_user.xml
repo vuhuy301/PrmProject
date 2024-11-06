@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -19,7 +18,7 @@
 
 
             <ImageView
-                android:id="@+id/imageView4"
+                android:id="@+id/imageView8"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
@@ -33,7 +32,7 @@
                 android:id="@+id/textView6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Quản lý đơn hàng"
+                android:text="Create new user"
                 android:textColor="#FFFFFF"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -45,15 +44,42 @@
                 app:layout_constraintVertical_bias="0.484" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
-    <Spinner
-        android:id="@+id/statusSpinner"
+
+    <EditText
+        android:id="@+id/editTextUserName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"/>
-    <!-- RecyclerView để hiển thị danh sách đơn hàng -->
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewOrders"
+        android:hint="User Name" />
+
+    <EditText
+        android:id="@+id/editTextUserEmail"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="8dp"/>
+        android:layout_height="wrap_content"
+        android:hint="User Email" />
+
+    <EditText
+        android:id="@+id/editTextUserPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="User Password"
+        android:inputType="textPassword" />
+
+    <Spinner
+        android:id="@+id/spinnerRole"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/buttonCreateUser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Create User" />
+
+    <Button
+        android:id="@+id/buttonCancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cancel" />
+
+
 </LinearLayout>

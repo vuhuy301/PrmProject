@@ -1,18 +1,24 @@
 package com.example.onlineshop.model;
 
-public class User {
-    private int userId;
+import java.io.Serializable;
+
+public class User implements Serializable {
+    private String id;
     private String name;
     private String email;
     private String password;
     private String address;
     private String phoneNumber;
-    private Boolean isActive;
-
+    private Boolean isActive; // Hoặc boolean
     private String role;
 
-    public User(int userId, String name, String email, String password, String address, String phoneNumber, Boolean isActive, String role) {
-        this.userId = userId;
+    // Constructor không tham số
+    public User() {
+    }
+
+    // Constructor với tham số
+    public User(String id, String name, String email, String password, String address, String phoneNumber, Boolean isActive, String role) {
+        this.id = id;
         this.name = name;
         this.email = email;
         this.password = password;
@@ -21,15 +27,15 @@ public class User {
         this.isActive = isActive;
         this.role = role;
     }
-
-    public int getUserId() {
-        return userId;
+    // Getter and Setter for id
+    public String getId() {
+        return id;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setId(String id) {
+        this.id = id;
     }
-
+    // Getter và Setter
     public String getName() {
         return name;
     }
@@ -70,12 +76,12 @@ public class User {
         this.phoneNumber = phoneNumber;
     }
 
-    public Boolean getActive() {
+    public Boolean getIsActive() {
         return isActive;
     }
 
-    public void setActive(Boolean active) {
-        isActive = active;
+    public void setIsActive(Boolean isActive) {
+        this.isActive = isActive;
     }
 
     public String getRole() {
