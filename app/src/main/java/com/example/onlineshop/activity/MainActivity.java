@@ -1,5 +1,5 @@
 package com.example.onlineshop.activity;
-
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Window;
 
@@ -47,6 +47,11 @@ public class MainActivity extends AppCompatActivity {
 
         setUpCategoryClickListeners();
 //        setContentView(R.layout.list_order);
+        binding.imageView69.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, CartActivity.class);
+            startActivity(intent);
+        });
+
         binding.categoryLayoutAll.setOnClickListener(v -> fetchProducts());
     }
 
