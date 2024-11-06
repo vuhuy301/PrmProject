@@ -190,14 +190,14 @@
                         android:id="@+id/imageView51"
                         android:layout_width="match_parent"
                         android:layout_height="55dp"
-                        app:srcCompat="@drawable/laptop10" />
+                        app:srcCompat="@drawable/laptop4" />
 
                     <TextView
                         android:id="@+id/textView61"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:text="Office"
+                        android:text="Gaming"
                         android:textAlignment="center"
                         android:textColor="@color/black"
 
@@ -215,14 +215,14 @@
                         android:id="@+id/imageView52"
                         android:layout_width="match_parent"
                         android:layout_height="55dp"
-                        app:srcCompat="@drawable/laptop6" />
+                        app:srcCompat="@drawable/laptop8" />
 
                     <TextView
                         android:id="@+id/textView62"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:text="Graphics"
+                        android:text="Office"
                         android:textAlignment="center"
                         android:textColor="@color/black"
 
@@ -239,15 +239,15 @@
                     <ImageView
                         android:id="@+id/imageView53"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:srcCompat="@drawable/cat3" />
+                        android:layout_height="55dp"
+                        app:srcCompat="@drawable/laptop3" />
 
                     <TextView
                         android:id="@+id/textView63"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:text="Gaming"
+                        android:text="Graphics"
                         android:textAlignment="center"
                         android:textColor="@color/black"
 
@@ -264,15 +264,15 @@
                     <ImageView
                         android:id="@+id/imageView54"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:srcCompat="@drawable/cat4" />
+                        android:layout_height="55dp"
+                        app:srcCompat="@drawable/laptop1" />
 
                     <TextView
                         android:id="@+id/textView64"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:text="Beauty"
+                        android:text="Study"
                         android:textAlignment="center"
                         android:textColor="@color/black"
 
