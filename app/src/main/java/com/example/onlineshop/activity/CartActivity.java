@@ -41,6 +41,11 @@ public class CartActivity extends AppCompatActivity {
             @Override
             public void onGetCartSuccess(Cart cartt) {
                 cart = cartt;
+                if(cart.getItems() == null){
+                    binding.emptyTxt.setVisibility(View.VISIBLE);
+                    binding.cartView.setVisibility(View.GONE);
+                    return;
+                }
                 if (cart.getItems().isEmpty()) {
                     binding.emptyTxt.setVisibility(View.VISIBLE);
                     binding.cartView.setVisibility(View.GONE);
@@ -61,6 +66,15 @@ public class CartActivity extends AppCompatActivity {
         binding.backBtn.setOnClickListener(v -> onBackPressed());
 
         binding.button2.setOnClickListener(v -> {
+            if(cart.getItems()==null){
+                Toast.makeText(CartActivity.this, "Giỏ hàng trống", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            if (cart.getItems().isEmpty()) {
+                Toast.makeText(CartActivity.this, "Giỏ hàng trống", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
             User fakeUser = new User("1" , "Usertest", "nguyenthitha@example.com", "password123", "456 Tran Hung Dao, Hanoi", "0123456789", true, "customer");
             cartService.orderCart(fakeUser, cart, new CartService.OnCompleteListener() {
                 @Override
@@ -85,6 +99,11 @@ public class CartActivity extends AppCompatActivity {
                     @Override
                     public void onGetCartSuccess(Cart cartt) {
                         cart = cartt;
+                        if(cart.getItems() == null){
+                            binding.emptyTxt.setVisibility(View.VISIBLE);
+                            binding.cartView.setVisibility(View.GONE);
+                            return;
+                        }
                         if (cart.getItems().isEmpty()) {
                             binding.emptyTxt.setVisibility(View.VISIBLE);
                             binding.cartView.setVisibility(View.GONE);
@@ -110,6 +129,12 @@ public class CartActivity extends AppCompatActivity {
                     @Override
                     public void onGetCartSuccess(Cart cartt) {
                         cart = cartt;
+                        if(cart.getItems() == null){
+                            binding.emptyTxt.setVisibility(View.VISIBLE);
+                            binding.cartView.setVisibility(View.GONE);
+                            return;
+                        }
+
                         if (cart.getItems().isEmpty()) {
                             binding.emptyTxt.setVisibility(View.VISIBLE);
                             binding.cartView.setVisibility(View.GONE);

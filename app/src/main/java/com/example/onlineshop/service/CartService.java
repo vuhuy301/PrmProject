@@ -100,7 +100,6 @@ public class CartService {
     public void orderCart(User user, Cart cart, OnCompleteListener onCompleteListener) {
         DatabaseReference databaseOrder = FirebaseDatabase.getInstance().getReference("order");
 
-
         Order order = new Order();
         order.setOrderId(generateOrderId());
         order.setUserId(Integer.parseInt(user.getId()));
