@@ -27,18 +27,39 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class OrderManageActivity extends AppCompatActivity {
     private RecyclerView recyclerViewOrders;
     private OrderAdapter orderAdapter;
     private List<Order> orderList;
+    private Map<String, String> orderIdMap = new HashMap<>();
     private DatabaseReference databaseReference;
+
     private String id;
+
+    private String userRole;
+
+    private String[] orderStatuses;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.list_order);
+        userRole = "shipper";
+        Spinner statusSpinner = findViewById(R.id.statusSpinner);
+        if ("admin".equals(userRole)) {
+            orderStatuses = new String[]{"Tất cả", "Chưa xác nhận", "Đã xác nhận", "Đang giao", "Giao thành công", "Đã hủy", "Giao không thành công"};
+        } else if ("shipper".equals(userRole)) {
+            orderStatuses = new String[]{"Tất cả", "Đã xác nhận", "Đang giao", "Giao thành công"};
+        }
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, orderStatuses);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        statusSpinner.setAdapter(adapter);
+
 
         Spinner statusSpinner = findViewById(R.id.statusSpinner);
         String[] orderStatuses = {"Tất cả", "Chưa xác nhận", "Đã xác nhận", "Đang giao", "Giao thành công"};
@@ -53,7 +74,8 @@ public class OrderManageActivity extends AppCompatActivity {
         orderAdapter = new OrderAdapter(orderList);
         recyclerViewOrders.setAdapter(orderAdapter);
 
-        orderAdapter.setOnItemClickListener(order -> {
+        orderAdapter.setOnItemClickListener((order) -> {
+            String id = orderIdMap.get(order.getOrderId());
             Intent intent = new Intent(OrderManageActivity.this, OrderDetailActivity.class);
             intent.putExtra("orderId", order.getOrderId());
             intent.putExtra("orderName", order.getName());
@@ -69,22 +91,34 @@ public class OrderManageActivity extends AppCompatActivity {
 
         databaseReference = FirebaseDatabase.getInstance().getReference("order");
 
-        // Đọc dữ liệu từ Firebase
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 orderList.clear();
+                orderIdMap.clear();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     id = snapshot.getKey();
                     Order order = snapshot.getValue(Order.class);
-                    orderList.add(order);
+                    String id = snapshot.getKey();
+                    if ("admin".equals(userRole)) {
+                        orderList.add(order);
+                        orderIdMap.put(order.getOrderId(), id);
+                    } else if ("shipper".equals(userRole)) {
+                        if ("Đã xác nhận".equals(order.getStatus()) ||
+                                "Đang giao".equals(order.getStatus()) ||
+                                "Đã giao".equals(order.getStatus())) {
+                            orderList.add(order);
+                            orderIdMap.put(order.getOrderId(), id);
+                        }
+                    }
                 }
                 orderAdapter.notifyDataSetChanged();
+                filterOrdersByStatus(getSelectedStatus(statusSpinner));
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                // Xử lý lỗi khi không thể đọc dữ liệu từ Firebase
+
             }
         });
         statusSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -96,7 +130,6 @@ public class OrderManageActivity extends AppCompatActivity {
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                // Do nothing
             }
         });
 
@@ -111,14 +144,16 @@ public class OrderManageActivity extends AppCompatActivity {
 
     }
     private void filterOrdersByStatus(String status) {
-        // Bộ lọc danh sách đơn hàng theo trạng thái
         List<Order> filteredOrders = new ArrayList<>();
         for (Order order : orderList) {
             if (status.equals("Tất cả") || order.getStatus().equals(status)) {
                 filteredOrders.add(order);
             }
         }
-        // Cập nhật Adapter với danh sách đã lọc
         orderAdapter.updateOrders(filteredOrders);
+    }
+    private String getSelectedStatus(Spinner spinner) {
+        return spinner.getSelectedItem().toString();
+
     }
 }

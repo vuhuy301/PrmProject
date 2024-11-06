@@ -36,11 +36,15 @@ public class OrderDetailActivity extends AppCompatActivity {
     private DatabaseReference order;
     private String orderId;
     private String id;
+
+
+    private String userRole;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.order_detail);
-
+        userRole = "shipper";
         orderIdTextView = findViewById(R.id.orderId);
         nameTextView = findViewById(R.id.name);
         phoneTextView = findViewById(R.id.phone);
@@ -89,9 +93,21 @@ public class OrderDetailActivity extends AppCompatActivity {
         super.onCreateContextMenu(menu, v, menuInfo);
         if (v.getId() == R.id.imageView2) {
             menu.setHeaderTitle("Chọn trạng thái");
+
             menu.add(0, v.getId(), 0, "Chưa xác nhận");
             menu.add(0, v.getId(), 1, "Đang giao");
             menu.add(0, v.getId(), 2, "Đã giao");
+
+            if(userRole.equals("shipper")){
+                menu.add(0, v.getId(), 0, "Đang giao");
+                menu.add(0, v.getId(), 1, "Đã giao");
+                menu.add(0, v.getId(), 2, "Giao không thành công");
+            }else{
+                menu.add(0, v.getId(), 0, "Đã xác nhận");
+                menu.add(0, v.getId(), 1, "Đã huỷ");
+            }
+
+
         }
     }
 
@@ -114,4 +130,6 @@ public class OrderDetailActivity extends AppCompatActivity {
 
 
 
+
 }
+
