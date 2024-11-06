@@ -176,7 +176,7 @@ public class CartService {
         Random random = new Random();
         StringBuilder randomDigits = new StringBuilder();
         for (int i = 0; i < length; i++) {
-            randomDigits.append(random.nextInt(10));
+            randomDigits.append(random.nextInt(9));
         }
         return randomDigits.toString();
     }
