@@ -103,7 +103,7 @@
 
         <TextView
             android:id="@+id/orderStatus"
-            android:layout_width="228dp"
+            android:layout_width="249dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="Trạng thái: Đã giao"

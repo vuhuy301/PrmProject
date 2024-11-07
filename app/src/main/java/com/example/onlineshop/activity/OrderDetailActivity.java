@@ -42,7 +42,7 @@ public class OrderDetailActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.order_detail);
-        userRole = "shipper";
+        userRole = "admin";
         orderIdTextView = findViewById(R.id.orderId);
         nameTextView = findViewById(R.id.name);
         phoneTextView = findViewById(R.id.phone);
@@ -68,7 +68,7 @@ public class OrderDetailActivity extends AppCompatActivity {
         addressTextView.setText("Địa chỉ: " + address);
         orderDateTextView.setText("Ngày đặt hàng: " + orderDate);
         orderStatusTextView.setText("Trạng thái: " + orderStatus);
-        totalAmountTextView.setText("Tổng: " + totalAmount + " Đ");
+        totalAmountTextView.setText("Tổng: " + totalAmount + " $");
 
         productsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         orderItemAdapter = new OrderItemAdapter(orderItems);

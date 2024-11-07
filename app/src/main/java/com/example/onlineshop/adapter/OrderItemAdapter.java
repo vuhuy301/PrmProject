@@ -34,7 +34,7 @@ public class OrderItemAdapter extends RecyclerView.Adapter<OrderItemAdapter.Orde
 
     @Override
     public void onBindViewHolder(@NonNull OrderItemViewHolder holder, int position) {
-        // Gắn dữ liệu vào các view của từng item
+
         OrderItem orderItem = orderItemList.get(position);
         holder.productNameTextView.setText(orderItem.getProductName());
         holder.quantityTextView.setText("x" + orderItem.getQuantity());

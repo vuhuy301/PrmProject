@@ -337,7 +337,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/PopularView"
                 android:layout_width="match_parent"
-                android:layout_height="276dp"
+                android:layout_height="256dp"
                 android:clipToPadding="false"
                 android:paddingStart="12dp"
                 android:paddingEnd="12dp"

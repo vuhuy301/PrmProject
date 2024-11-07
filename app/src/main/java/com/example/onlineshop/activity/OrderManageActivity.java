@@ -81,7 +81,6 @@ public class OrderManageActivity extends AppCompatActivity {
 
         databaseReference = FirebaseDatabase.getInstance().getReference("order");
 
-        // Đọc dữ liệu từ Firebase
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -103,11 +102,12 @@ public class OrderManageActivity extends AppCompatActivity {
                     }
                 }
                 orderAdapter.notifyDataSetChanged();
+                filterOrdersByStatus(getSelectedStatus(statusSpinner));
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                // Xử lý lỗi khi không thể đọc dữ liệu từ Firebase
+
             }
         });
         statusSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -119,7 +119,7 @@ public class OrderManageActivity extends AppCompatActivity {
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                // Do nothing
+
             }
         });
 
@@ -141,5 +141,8 @@ public class OrderManageActivity extends AppCompatActivity {
             }
         }
         orderAdapter.updateOrders(filteredOrders);
+    }
+    private String getSelectedStatus(Spinner spinner) {
+        return spinner.getSelectedItem().toString();
     }
 }

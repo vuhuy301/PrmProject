@@ -1,5 +1,6 @@
 package com.example.onlineshop.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.activity.EdgeToEdge;
@@ -31,6 +32,20 @@ public class DetailActivity extends AppCompatActivity {
 
         getBundles();
         binding.backBtn.setOnClickListener(v -> finish());
+
+        binding.buyBtnDetail.setOnClickListener(v -> {
+            // Tạo một Intent để chuyển sang màn hình mua hàng
+            Intent intent = new Intent(DetailActivity.this, OrderSingleActivity.class);
+
+            // Truyền dữ liệu sản phẩm qua Intent
+            intent.putExtra("productName", object.getName());
+            intent.putExtra("productPrice", object.getPrice());
+            intent.putExtra("productImage", object.getImages());
+            intent.putExtra("productId", object.getProductId());
+
+            // Khởi động Activity mua hàng
+            startActivity(intent);
+        });
     }
 
     private void getBundles() {
